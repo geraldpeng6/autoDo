@@ -1,0 +1,9 @@
+# 在此文件中列出模板图片的文件名，每行一个
+# 图片应该放在 pics/ 目录下
+1ConnectWallet.png
+2MetaMask.png
+3lianjie.png
+queren.png
+input1.png
+stake.png
+queren.png

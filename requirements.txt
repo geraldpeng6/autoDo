@@ -1,0 +1,5 @@
+opencv-python>=4.5.0
+numpy>=1.19.0
+pyautogui>=0.9.53
+Pillow>=10.0.0  # 添加 Pillow 依赖
+pyscreeze>=0.1.28  # 更新 pyscreeze 版本
