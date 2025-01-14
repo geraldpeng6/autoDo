@@ -27,6 +27,7 @@ def setup_logging():
     )
     return log_file
 
+# 获得屏幕信息和缩放比例
 def get_screen_info():
     """获取屏幕信息和缩放比例"""
     try:
@@ -164,7 +165,8 @@ def save_debug_image(screenshot, matches, template_file, w, h, scale_x, scale_y,
         
         # 保存图片
         os.makedirs('debugForTu', exist_ok=True)
-        debug_path = os.path.join('debugForTu', f'debug_{template_file}')
+        timestamp = datetime.now().strftime("%d号%H时%M分%S秒")
+        debug_path = os.path.join('debugForTu', f'{timestamp}_{template_file}')
         cv2.imwrite(debug_path, debug_img)
         logging.info(f"已保存debug图片: {debug_path}")
         
@@ -441,7 +443,7 @@ def main():
                     raise RuntimeError(error_msg)
             
             i += 1
-        
+        time.sleep(10)  # 等待页面加载完成
         logging.info("程序成功完成所有操作")
         
     except Exception as e:

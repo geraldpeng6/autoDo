@@ -7,3 +7,4 @@ queren.png
 input1.png
 stake.png
 queren.png
+stake_success.png
