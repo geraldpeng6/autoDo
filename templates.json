@@ -1,0 +1,16 @@
+{
+    "templates": [
+        {
+            "image": "pics/pics_verio/1ConnectWallet.png"
+        },
+        {
+            "image": "pics/pics_verio/metamask.png",
+            "type": "metamask"
+        },
+        {
+            "image": "pics/pics_verio/input1.png",
+            "offset": [-0.4, 0],
+            "operation": "input(random(0.1,0.2))"
+        }
+    ]
+}
