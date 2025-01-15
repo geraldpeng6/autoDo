@@ -8,13 +8,11 @@ import logging
 import json
 
 from src.utils.logging_config import setup_logging
-from src.utils.screen import get_screen_info
 from src.image.template_matcher import find_template
-from src.actions.mouse import click_position
 from src.actions.metamask import handle_metamask_process
 from src.actions.operations import handle_operations
 from src.config import settings
-
+import pyautogui
 
 def process_templates(template_data):
     """处理模板文件中的图片"""
@@ -60,7 +58,7 @@ def process_templates(template_data):
         raise
 
 
-def main():
+def workflow(workjson):
     """主函数"""
     try:
         # 确保在项目根目录下运行
@@ -71,16 +69,22 @@ def main():
         log_file = setup_logging()
         logging.info("程序开始运行")
         logging.info(f"日志文件位置: {log_file}")
-        
-        # 获取屏幕信息
-        _, _, _, _, scale_x, scale_y = get_screen_info()
-        print("scale_x, scale_y:")
-        print(scale_x, scale_y)
+        # 要用请新建一个json
+        workjson = workjson
+
+        # 获取缩放信息
+        screen_width, screen_height = pyautogui.size()
+        scale_x =  settings.display_width/screen_width
+        scale_y =  settings.display_height/screen_height
+
+        print(f"Screen resolution: {screen_width}x{screen_height}")
+        print(f"Scale factors: x={scale_x:.2f}, y={scale_y:.2f}")
+
         settings.scale_x = scale_x
         settings.scale_y = scale_y
         
         # 读取JSON模板文件
-        with open('/Users/jiale/Documents/code/autoDo/verio.json', 'r') as json_file:
+        with open(workjson, 'r') as json_file:
             templates_data = json.load(json_file)
         process_templates(templates_data)
         
@@ -90,4 +94,11 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # 要用请新建一个json
+    workjson_path = ["./verio.json",
+                     ]
+    settings.display_width = 2560
+    settings.display_height = 1600
+
+    for workjson in workjson_path:
+        workflow(workjson)

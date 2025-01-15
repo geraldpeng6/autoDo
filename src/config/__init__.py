@@ -23,7 +23,8 @@ class Settings:
         # 屏幕缩放比例
         self.scale_x = 1.0
         self.scale_y = 1.0
-        
+        self.display_width = 2560
+        self.display_height = 1600
         # MetaMask配置
         self.metamask_password = os.getenv('METAMASK_PASSWORD', 'password')
 
