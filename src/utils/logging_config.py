@@ -1,5 +1,6 @@
 """
 日志配置模块
+提供日志系统的配置功能，支持同时输出到文件和控制台。
 """
 import os
 import logging
@@ -9,6 +10,17 @@ import datetime
 def setup_logging():
     """
     设置日志配置
+    
+    Returns:
+        str: 日志文件路径
+        
+    Note:
+        - 日志文件保存在logs/log/目录下
+        - 文件名格式：auto_do_年月日_时分秒.log
+        - 日志级别：INFO
+        - 日志格式：时间 - 级别 - 消息
+        - 同时输出到文件和控制台
+        - 时间格式：年-月-日 时:分:秒
     """
     # 创建日志目录
     log_dir = os.path.join('logs', 'log')

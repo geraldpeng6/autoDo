@@ -1,5 +1,6 @@
 """
 屏幕信息处理模块
+提供屏幕分辨率和缩放比例相关的功能。
 """
 import pyautogui
 import logging
@@ -10,7 +11,21 @@ def get_screen_info():
     获取屏幕信息
     
     Returns:
-        tuple: (实际分辨率宽度, 实际分辨率高度, 缩放后分辨率宽度, 缩放后分辨率高度, X轴缩放比例, Y轴缩放比例)
+        tuple: 包含以下信息：
+            - real_width (int): 实际分辨率宽度
+            - real_height (int): 实际分辨率高度
+            - scaled_width (int): 缩放后分辨率宽度
+            - scaled_height (int): 缩放后分辨率高度
+            - scale_x (float): X轴缩放比例
+            - scale_y (float): Y轴缩放比例
+            
+    Raises:
+        Exception: 获取屏幕信息失败时抛出
+        
+    Note:
+        - 实际分辨率是物理显示器的分辨率
+        - 缩放后分辨率是考虑系统缩放设置后的分辨率
+        - 缩放比例 = 实际分辨率 / 缩放后分辨率
     """
     try:
         # 获取实际分辨率

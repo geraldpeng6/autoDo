@@ -1,5 +1,6 @@
 """
 鼠标操作模块
+提供鼠标点击相关的功能，支持坐标缩放和偏移调整。
 """
 import time
 import pyautogui
@@ -16,15 +17,20 @@ def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y
     点击指定位置
     
     Args:
-        pos: 位置坐标 (x, y)
-        size: 大小 (width, height)
-        scale_x: X轴缩放比例
-        scale_y: Y轴缩放比例
-        offset_x: X轴偏移比例
-        offset_y: Y轴偏移比例
+        pos (tuple): 位置坐标 (x, y)
+        size (tuple): 目标区域大小 (width, height)
+        scale_x (float): X轴缩放比例，默认使用全局设置
+        scale_y (float): Y轴缩放比例，默认使用全局设置
+        offset_x (float): X轴偏移比例，范围[-1.0, 1.0]，0表示中心点
+        offset_y (float): Y轴偏移比例，范围[-1.0, 1.0]，0表示中心点
         
     Returns:
         bool: 点击是否成功
+        
+    Note:
+        - 实际点击位置会根据缩放比例和偏移量进行调整
+        - 偏移量是相对于目标区域大小的比例
+        - 点击前会有0.1秒的鼠标移动时间
     """
     try:
         if not pos or not size:
@@ -42,13 +48,6 @@ def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y
         logging.info(f"缩放比例: X={scale_x:.3f}, Y={scale_y:.3f}")
         logging.info(f"偏移比例: X={offset_x:.3f}, Y={offset_y:.3f}")
         logging.info(f"最终点击位置: ({click_x:.1f}, {click_y:.1f})")
-        
-        # 保存debug图片
-        screenshot = pyautogui.screenshot()
-        screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-        threading.Thread(target=save_debug_image, args=(screenshot, [(x, y)], "click_position",
-                                                      width, height, scale_x, scale_y, 1.0, 0, True,
-                                                      offset_x, offset_y, True), daemon=True).start()
         
         # 执行点击
         pyautogui.moveTo(click_x, click_y, duration=0.1)

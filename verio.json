@@ -1,0 +1,25 @@
+{
+    "templates": [
+        {
+            "image": ["pics/browser/chrome.png"],
+            "offset": [-0.1, 0.1],
+            "operations": [
+                {"input": "https://www.verio.network/staking"}
+            ]
+        },
+        {
+            "image": ["pics/pics_verio/connectWallet.png"]
+        },
+        {
+            "image": ["pics/pics_verio/metamask.png", "pics/pics_verio/metamask_alt.png"]
+        },
+        {
+            "image": "pics/pics_verio/input1.png",
+            "offset": [-0.4, 0],
+            "operations": [
+                {"input": "random(0.1,0.2)"},
+                {"move": [0, -0.3]}
+            ]
+        }
+    ]
+}
