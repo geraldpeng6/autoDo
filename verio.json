@@ -4,6 +4,9 @@
             "image": ["pics/browser/chrome.png"],
             "offset": [-0.1, 0.1],
             "operations": [
+                {"click": {"click_count": 1, "offset": [0.0, 0.5]}},
+                {"click": {"click_count": 1, "offset": [0.0, 0.0]}},
+                {"click": {"click_count": 1, "offset": [0.0, -0.5]}},
                 {"input": "https://www.verio.network/staking"},
                 {"keyboard": ["enter"]}
             ]
@@ -12,7 +15,7 @@
             "image": ["pics/pics_verio/connectWallet.png"]
         },
         {
-            "image": ["pics/pics_verio/metamask.png", "pics/pics_verio/metamask_alt.png"]
+            "image": ["pics/pics_verio/metamask.png", "pics/pics_verio/metamask2.png"]
         },
         {
             "image": "pics/pics_verio/input1.png",
@@ -20,6 +23,16 @@
                 {"click": {"click_count": 1, "offset": [-0.4, 0.0]}},
                 {"input": "random(0.1,0.2)"},
                 {"move": [0, -0.3]}
+            ]
+        },
+        {
+            "image": ["pics/pics_verio/stake_metamask_wait.png"]
+        },
+        {
+            "image": "pics/pics_verio/stake_success_wait.png",
+            "operations": [
+                {"wait": 10},
+                {"click": [0, 0]}
             ]
         }
     ]

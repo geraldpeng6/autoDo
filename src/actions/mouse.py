@@ -67,6 +67,7 @@ def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y
         
         # 执行点击
         pyautogui.moveTo(click_x, click_y, duration=0.1)
+
         for _ in range(click_count):
             pyautogui.click()
         return True

@@ -1,0 +1,12 @@
+{
+    "templates": [
+        {
+            "image": ["image.png"],
+            "operations": [
+                {"click": {"click_count": 1, "offset": [-0.4, 0]}},
+                {"click": {"click_count": 1, "offset": [0.0, 0.0]}},
+                {"click": {"click_count": 1, "offset": [0.4, 0]}}
+            ]
+        }
+    ]
+}    

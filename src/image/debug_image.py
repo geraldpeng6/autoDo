@@ -36,6 +36,7 @@ def save_debug_image(screenshot, match_positions: List[Tuple[int, int]], templat
             - 'match'：匹配成功（绿色标注）
             - 'click'：点击操作（蓝色标注）
             - 'fail'：匹配失败（红色标注）
+            - 'success'：一套流程成功
             
     Note:
         - 图片将保存在logs/debug_images/目录下
@@ -44,12 +45,13 @@ def save_debug_image(screenshot, match_positions: List[Tuple[int, int]], templat
           * match: 绿色
           * click: 蓝色
           * fail: 红色
+          * success
         - 会在图片上显示匹配置信度
         - 对于点击操作，会额外绘制点击位置的十字线和圆圈
     """
     try:
         # 确保image_type是有效的字符串值
-        if not isinstance(image_type, str) or image_type not in ['match', 'click', 'fail']:
+        if not isinstance(image_type, str) or image_type not in ['match', 'click', 'fail', 'success']:
             image_type = 'match'  # 默认值
             
         # 确保template_name是有效的字符串值
@@ -67,7 +69,10 @@ def save_debug_image(screenshot, match_positions: List[Tuple[int, int]], templat
         
         # 复制截图
         debug_image = screenshot.copy()
-        
+        if image_type == 'success':
+            cv2.imwrite(filepath, debug_image)
+            log_msg = f"已保存{image_type}，大功告成，图片: {filepath}"
+            return  # 无需继续处理，直接返回
         # 在图片上绘制匹配位置
         for pos in match_positions:
             x, y = pos

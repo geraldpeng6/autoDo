@@ -98,7 +98,7 @@ def handle_metamask_extension():
         - 失败时会记录错误日志
     """
     try:
-        match_pos, template_size = find_template(['pics/pics_metamask/extension.png'])
+        match_pos, template_size = find_template(['pics/pics_metamask/extension.png','pics/pics_metamask/extension2.png'])
         if not match_pos or not click_position(match_pos, template_size,
                                              settings.scale_x,
                                              settings.scale_y):
@@ -113,7 +113,7 @@ def handle_metamask_extension():
         return False
 
 
-def handle_metamask_process(match_pos, template_size):
+def handle_metamask_process(match_pos, template_size,wait_time=5):
     """
     处理MetaMask的完整流程
     
@@ -135,8 +135,7 @@ def handle_metamask_process(match_pos, template_size):
         error_msg = "无法找到或点击MetaMask网页相关元素"
         logging.error(error_msg)
         return False
-        
-    time.sleep(0.1)
+    time.sleep(wait_time)
 
     # 如果没有连接界面，检查是否需要登录
     if click_blue_button_for_metamask() == 0:

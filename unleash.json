@@ -1,0 +1,67 @@
+{
+    "templates": [
+        {
+            "image": ["pics/pics_unleash/faucet3.png"],
+            "operations": [
+                {"click": {"click_count": 1, "offset": [0.0, 0.2]}},
+                {"click": {"click_count": 1, "offset": [0.0, 0.0]}},
+                {"click": {"click_count": 1, "offset": [0.0, -0.2]}}
+            ]
+        },
+        {
+            "image": ["pics/browser/chrome.png"],
+            "offset": [-0.1, 0.1],
+            "operations": [
+                {"input": "https://app.unleashprotocol.xyz/"},
+                {"keyboard": ["enter"]}
+            ]
+        },
+        {
+            "image": ["pics/pics_unleash/connectWallet.png","pics/pics_verio/connectWallet2.png"],
+            "operations": [
+                {"move": [0, -0.3]},
+                {"click": {"click_count": 1, "offset": [0.1, 0.0]}}
+            ]
+        },
+        {
+            "image": ["pics/pics_unleash/metamask.png", "pics/pics_unleash/metamask2.png"]
+        },
+        {
+            "image": ["pics/pics_unleash/errorConnecting.png"],
+            "operations": [
+                {"click": [0.48, 0.45]}
+            ]
+        },
+        {
+            "image": ["pics/pics_unleash/FAUCET.png"],
+            "operations": [
+                {"move": [0, -0.3]}
+            ]
+        },
+        {
+            "image": ["pics/pics_unleash/faucet3.png"],
+            "operations": [
+                {"click": [0, 0]}
+            ]
+        },
+        {
+            "image": ["pics/pics_unleash/max.png","pics/pics_unleash/max2.png"],
+            "operations": [
+                {"click": [0, 0]}
+            ]
+        },
+        {
+            "image": ["pics/pics_unleash/approve_metamask.png","pics/pics_unleash/approve2_metamask.png"],
+            "operations": [
+                {"click": [0, 0]}
+            ]
+        },
+        {
+            "image": "pics/pics_unleash/supply.png",
+            "operations": [
+                {"wait": 10},
+                {"click": [0, 0]}
+            ]
+        }
+    ]
+}

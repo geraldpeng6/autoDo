@@ -162,6 +162,12 @@ def handle_operation(operation: Dict[str, Any], match_pos: Optional[Tuple[int, i
             for key in keys:
                 pyautogui.press(key)
                 time.sleep(0.1)
+        elif 'wait' in operation:
+            wait_time = float(operation['wait'])
+            if wait_time < 0:
+                raise ValueError("等待时间不能为负数")
+            time.sleep(wait_time)
+            logging.info(f"别吵我在烧烤 {wait_time} 秒")
         else:
             raise ValueError(f"未知的操作类型: {operation}")
             

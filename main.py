@@ -13,10 +13,10 @@ from src.actions.metamask import handle_metamask_process
 from src.actions.operations import handle_operations
 from src.config import settings
 import pyautogui
-
 def process_templates(template_data):
     """处理模板文件中的图片"""
     time.sleep(3)
+    w = 0
     try:
         for template in template_data['templates']:
             template_images = template['image']
@@ -30,13 +30,16 @@ def process_templates(template_data):
             if 'offset' in template:
                 offset_x = template['offset'][0]
                 offset_y = template['offset'][1]
-            
+            if any('wait' in img for img in template_images):
+                wait_time = 10
             # 查找并点击图片
             match_pos, template_size = find_template(template_images)
             
             # 特殊处理MetaMask登录情况
             if any('metamask' in img for img in template_images):
-                if not handle_metamask_process(match_pos, template_size):
+                if any('wait' in img for img in template_images):
+                    w = 10
+                if not handle_metamask_process(match_pos, template_size, w):
                     raise RuntimeError()
                 continue
             
