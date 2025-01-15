@@ -24,23 +24,25 @@ def get_screen_info():
         
     Note:
         - 实际分辨率是物理显示器的分辨率
-        - 缩放后分辨率是考虑系统缩放设置后的分辨率
-        - 缩放比例 = 实际分辨率 / 缩放后分辨率
+        - 缩放后分辨率是设置中的显示分辨率
+        - 缩放比例 = 实际分辨率 / 设置分辨率
     """
     try:
         # 获取实际分辨率
         real_width, real_height = pyautogui.size()
         
-        # 获取缩放后的分辨率
-        scaled_width = real_width // 2  # 假设缩放比例为2
-        scaled_height = real_height // 2
+        # 设置中的显示分辨率（可以通过配置文件或环境变量设置）
+        # 例如: 2560x1600
+        from ..config import settings
+        scaled_width = settings.display_width if hasattr(settings, 'display_width') else 2560
+        scaled_height = settings.display_height if hasattr(settings, 'display_height') else 1600
         
         # 计算缩放比例
-        scale_x = real_width / scaled_width
-        scale_y = real_height / scaled_height
+        scale_x =  scaled_width/real_width
+        scale_y =  scaled_height/real_height
         
-        logging.info(f"实际分辨率: {real_width}x{real_height}")
-        logging.info(f"系统缩放后分辨率: {scaled_width}x{scaled_height}")
+        logging.info(f"工具分辨率: {real_width}x{real_height}")
+        logging.info(f"显示屏幕分辨率: {scaled_width}x{scaled_height}")
         logging.info(f"缩放比例 - X轴: {scale_x:.3f}, Y轴: {scale_y:.3f}")
         
         return real_width, real_height, scaled_width, scaled_height, scale_x, scale_y

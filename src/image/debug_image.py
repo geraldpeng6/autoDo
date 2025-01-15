@@ -82,8 +82,9 @@ def save_debug_image(screenshot, match_positions: List[Tuple[int, int]], templat
                 'click': (255, 0, 0),  # 蓝色
                 'fail': (0, 0, 255)    # 红色
             }.get(image_type, (0, 255, 0))  # BGR格式
-            
+        
             # 绘制矩形
+            logging.info(f"绘制矩形: {actual_x}, {actual_y}, {template_width}, {template_height}")
             cv2.rectangle(debug_image,
                         (actual_x, actual_y),
                         (actual_x + template_width, actual_y + template_height),

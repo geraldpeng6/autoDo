@@ -12,7 +12,7 @@ from src.config import settings
 from src.image.debug_image import save_debug_image
 
 
-def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y, offset_x=0, offset_y=0):
+def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y, offset_x=0, offset_y=0, click_count=1,random_click=[0,0]):
     """
     点击指定位置
     
@@ -40,9 +40,25 @@ def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y
         width, height = size
         
         # 计算实际点击位置（考虑缩放和偏移）
-        # 由于模板匹配是在实际分辨率下进行的，需要将坐标除以缩放比例
-        click_x = (x + width * (0.5 + offset_x)) / scale_x
-        click_y = (y + height * (0.5 + offset_y)) / scale_y
+        # 模板匹配返回的坐标是在实际分辨率下的，所以需要除以缩放比例
+        base_x = x / scale_x
+        base_y = y / scale_y
+        
+        # 目标区域的大小也需要除以缩放比例
+        scaled_width = width / scale_x
+        scaled_height = height / scale_y
+        
+        # 计算最终点击位置（加上偏移）
+        click_x = base_x + scaled_width * (0.5 + offset_x)
+        click_y = base_y + scaled_height * (0.5 + offset_y)
+        
+        # 添加随机偏移
+        if random_click[0] > 0:
+            random_offset_x = np.random.uniform(0, scaled_width * random_click[0])
+            click_x += random_offset_x
+        if random_click[1] > 0:
+            random_offset_y = np.random.uniform(0, scaled_height * random_click[1])
+            click_y += random_offset_y
         
         logging.info(f"原始坐标: ({x}, {y}), 大小: {width}x{height}")
         logging.info(f"缩放比例: X={scale_x:.3f}, Y={scale_y:.3f}")
@@ -51,7 +67,8 @@ def click_position(pos, size, scale_x=settings.scale_x, scale_y=settings.scale_y
         
         # 执行点击
         pyautogui.moveTo(click_x, click_y, duration=0.1)
-        pyautogui.click()
+        for _ in range(click_count):
+            pyautogui.click()
         return True
         
     except Exception as e:

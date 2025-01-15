@@ -12,7 +12,7 @@ from src.utils.screen import get_screen_info
 from src.image.template_matcher import find_template
 from src.actions.mouse import click_position
 from src.actions.metamask import handle_metamask_process
-from src.actions.operations import handle_operation, handle_operations
+from src.actions.operations import handle_operations
 from src.config import settings
 
 
@@ -42,25 +42,17 @@ def process_templates(template_data):
                     raise RuntimeError()
                 continue
             
-            # 点击位置
-            if not match_pos or not click_position(match_pos, template_size,
-                                                 settings.scale_x,
-                                                 settings.scale_y,
-                                                 offset_x=offset_x,
-                                                 offset_y=offset_y):
-                error_msg = f"无法找到或点击图片: {template_images}"
+            if not match_pos:
+                error_msg = f"无法找到图片: {template_images}"
                 logging.error(error_msg)
                 raise RuntimeError(error_msg)
             
-            # 执行额外操作（如果有）
-            if 'operation' in template:
-                handle_operation({'input': template['operation']})
-            elif 'operations' in template:
-                handle_operations(template['operations'])
+            # 执行操作
+            operations = template.get('operations', [])
+            handle_operations(operations, match_pos=match_pos, template_size=template_size)
             
             time.sleep(1)
         
-        time.sleep(10)  # 等待页面加载完成
         logging.info("程序成功完成所有操作")
         
     except Exception as e:
@@ -82,6 +74,8 @@ def main():
         
         # 获取屏幕信息
         _, _, _, _, scale_x, scale_y = get_screen_info()
+        print("scale_x, scale_y:")
+        print(scale_x, scale_y)
         settings.scale_x = scale_x
         settings.scale_y = scale_y
         

@@ -4,7 +4,8 @@
             "image": ["pics/browser/chrome.png"],
             "offset": [-0.1, 0.1],
             "operations": [
-                {"input": "https://www.verio.network/staking"}
+                {"input": "https://www.verio.network/staking"},
+                {"keyboard": ["enter"]}
             ]
         },
         {
@@ -15,8 +16,8 @@
         },
         {
             "image": "pics/pics_verio/input1.png",
-            "offset": [-0.4, 0],
             "operations": [
+                {"click": {"click_count": 1, "offset": [-0.4, 0.0]}},
                 {"input": "random(0.1,0.2)"},
                 {"move": [0, -0.3]}
             ]
