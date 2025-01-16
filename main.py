@@ -98,7 +98,7 @@ def workflow(workjson):
 
 if __name__ == '__main__':
     # 要用请新建一个json
-    workjson_path = ["./verio.json",
+    workjson_path = ["./json/verio.json",
                      ]
     settings.display_width = 2560
     settings.display_height = 1600
